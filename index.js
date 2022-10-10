@@ -10,10 +10,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded())
 
-
 app.use(express.static('./public'))
-
-
 
 //loogedIn middleware
 // app.use((req, res, next) => {
@@ -22,15 +19,11 @@ app.use(express.static('./public'))
 // })
 
 
-
-
 // // Handle Error Middleware
 // app.use((err, req, res, next) => {
 //     // err => Middleware Error
 //     res.status(500).end(err.message)
 // })
-
-
 
 
 
