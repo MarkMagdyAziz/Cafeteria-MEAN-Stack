@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    
+    "mongoose-validator": "^2.1.0"
+  }
+
     "bcryptjs": "^2.4.3",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
@@ -24,4 +28,5 @@
     "url": "https://github.com/MarkMagdyAziz/Cafeteria-MEAN-Stack/issues"
   },
   "homepage": "https://github.com/MarkMagdyAziz/Cafeteria-MEAN-Stack#readme"
+
 }
