@@ -13,25 +13,8 @@ app.use(express.urlencoded())
 app.use(express.static('./public'))
 
 //loogedIn middleware
-// app.use((req, res, next) => {
-//     console.log(`${new Date()} - ${req.method} - ${req.url}`) //server
-//     next()
-// })
 
-
-// // Handle Error Middleware
-// app.use((err, req, res, next) => {
-//     // err => Middleware Error
-//     res.status(500).end(err.message)
-// })
-
-
-
-// logg middle ware
-app.use((req, res, next) => {
-    console.log(`console`)
-    next()
-})
+//Handle Error Middleware
 
 mongoose.connect(DB_URL, {
     useNewUrlParser: true,
