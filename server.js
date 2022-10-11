@@ -4,10 +4,11 @@ const cookieSession = require("cookie-session");
 const dbConfig = require("./config/db.config.js");
 
 const app = express();
+app.use(express.json());
 
 // routes
 require('./routes/auth.routes')(app);
-//require('./routes/user.routes')(app);
+require('./routes/user.routes')(app);
 
 var corsOptions = {
   origin: "http://localhost:8081"
