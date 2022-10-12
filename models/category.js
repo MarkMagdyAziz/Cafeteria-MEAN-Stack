@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const validate = require("mongoose-validator");
+//const validate = require("mongoose-validator");
 
 const categorySchema = new mongoose.Schema({
   name: {
