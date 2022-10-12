@@ -2,20 +2,22 @@ const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
 const dbConfig = require("./config/db.config.js");
+const { productsRouter } = require("./routes/products");
+const { categoriesRouter } = require("./routes/categories");
 
 const app = express();
-//edit to routes
 const { orderRouter } = require("./routes/order.routes")
+app.use(express.json());
+
 // routes
-require('./routes/auth.routes')(app);
-//require('./routes/user.routes')(app);
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:8081",
 };
 
 app.use(cors(corsOptions));
-
 
 const db = require("./models");
 const Role = db.role;
@@ -23,17 +25,16 @@ const Role = db.role;
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(() => {
     console.log("Successfully connect to MongoDB.");
     initial();
   })
-  .catch(err => {
+  .catch((err) => {
     console.error("Connection error", err);
     process.exit();
   });
-
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -44,11 +45,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cookieSession({
     name: "Cafe-session",
-    keys: ['key1', 'key2'], 
-    secret: process.env.COOKIE_SECRET , //  secret environment variable
-    httpOnly: true
+    keys: ["key1", "key2"],
+    secret: process.env.COOKIE_SECRET, //  secret environment variable
+    httpOnly: true,
   })
 );
+app.use(["/product", "/products"], productsRouter);
+app.use(["/category", "/categories"], categoriesRouter);
 
 app.use(['/order', '/orders'], orderRouter) 
 
@@ -64,25 +67,22 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
-
-
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       new Role({
-        name: "user"
-      }).save(err => {
+        name: "user",
+      }).save((err) => {
         if (err) {
           console.log("error", err);
         }
 
         console.log("added 'user' to roles collection");
       });
-     
 
       new Role({
-        name: "admin"
-      }).save(err => {
+        name: "admin",
+      }).save((err) => {
         if (err) {
           console.log("error", err);
         }
@@ -92,4 +92,3 @@ function initial() {
     }
   });
 }
-
