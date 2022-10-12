@@ -4,7 +4,8 @@ const cookieSession = require("cookie-session");
 const dbConfig = require("./config/db.config.js");
 
 const app = express();
-
+//edit to routes
+const { orderRouter } = require("./routes/order.routes")
 // routes
 require('./routes/auth.routes')(app);
 //require('./routes/user.routes')(app);
@@ -48,6 +49,9 @@ app.use(
     httpOnly: true
   })
 );
+
+app.use(['/order', '/orders'], orderRouter) 
+
 
 // simple route
 // app.get("/", (req, res) => {
