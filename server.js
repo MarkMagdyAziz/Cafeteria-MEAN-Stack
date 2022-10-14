@@ -22,7 +22,7 @@ const { productsRouter } = require("./routes/products");
 const { categoriesRouter } = require("./routes/categories");
 
 
-const { orderRouter } = require("./routes/order.routes")
+
 app.use(express.json());
 
 // routes
@@ -71,8 +71,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(["/product", "/products"], productsRouter);
 app.use(["/category", "/categories"], categoriesRouter);
 
-app.use(['/order', '/orders'], orderRouter) 
-
+app.use(["/order", "/orders"], orderRouter);
 
 // simple route
 // app.get("/", (req, res) => {

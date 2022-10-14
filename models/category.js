@@ -11,7 +11,6 @@ const categorySchema = new mongoose.Schema({
     unique: true,
   },
   timestamp: { type: Date, default: Date.now() },
-  products: { type: mongoose.Schema.Types.ObjectId, ref: "product" },
 });
 
 module.exports = mongoose.model("Category", categorySchema);

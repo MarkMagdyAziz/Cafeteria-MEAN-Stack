@@ -24,7 +24,13 @@ const prodctSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
+  size: {
+    type: String,
+    enum: ["sm", "md", "lg"],
+    default: "sm",
+  },
   timestamp: { type: Date, default: Date.now() },
+  cat: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
 });
 
 module.exports = mongoose.model("Product", prodctSchema);

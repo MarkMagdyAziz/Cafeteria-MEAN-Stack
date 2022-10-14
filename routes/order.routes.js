@@ -1,11 +1,15 @@
 const express = require('express')
 const router = express.Router();
-const { getOrderModelByDate, getAll, getById, postNewOrder, editOrder, deleteOrderById } = require('../controllers/order.controller')
+const { getOrderModelByDate, getAll, getById, postNewOrder, editOrder, deleteOrderById, getOrdersByUser } = require('../controllers/order.controller')
 const OrderModel = require('../models/orders')
 
 
 //get all orders 
 router.get('/', getAll)
+
+
+
+router.get('/orderu', getOrdersByUser)
 
 //get data by date
 router.get('/date_range', getOrderModelByDate)
