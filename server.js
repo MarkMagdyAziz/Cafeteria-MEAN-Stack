@@ -6,7 +6,21 @@ const { productsRouter } = require("./routes/products");
 const { categoriesRouter } = require("./routes/categories");
 
 const app = express();
-const { orderRouter } = require("./routes/order.routes")
+const { orderRouter } = require("./routes/order.routes");
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, DELETE, PUT, OPTIONS"
+  );
+  next();
+});
+
 app.use(express.json());
 
 // routes
@@ -53,8 +67,7 @@ app.use(
 app.use(["/product", "/products"], productsRouter);
 app.use(["/category", "/categories"], categoriesRouter);
 
-app.use(['/order', '/orders'], orderRouter) 
-
+app.use(["/order", "/orders"], orderRouter);
 
 // simple route
 // app.get("/", (req, res) => {
