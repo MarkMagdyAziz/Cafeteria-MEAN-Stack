@@ -85,25 +85,29 @@ exports.signin = (req, res) => {
       if (!passwordIsValid) {
         return res.status(401).send({ message: "Invalid Password!" });
       }
-
+        //  console.log(config.secret);
       var token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 86400, // 24 hours
       });
-
+       //console.log(token);
       var authorities = [];
 
       for (let i = 0; i < user.roles.length; i++) {
         authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
       }
+      
+      //console.log(req.session.token );
 
-      req.session.token = token;
+      //req.session.token = token;
 
       res.status(200).send({
         id: user._id,
         username: user.username,
         email: user.email,
         roles: authorities,
+        token :token ,
       });
+     
     });
 };
 
