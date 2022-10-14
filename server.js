@@ -5,6 +5,7 @@ const dbConfig = require("./config/db.config.js");
 const { productsRouter } = require("./routes/products");
 const { categoriesRouter } = require("./routes/categories");
 
+
 const app = express();
 const { orderRouter } = require("./routes/order.routes");
 
