@@ -2,10 +2,26 @@ const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
 const dbConfig = require("./config/db.config.js");
+const app = express();
+
+app.use((req,res,next) => {
+  res.setHeader("Access-Control-Allow-Origin","*");
+ res.setHeader("Access-Control-Allow-Methods","*");
+ res.setHeader("Access-Control-Allow-Header","*");
+ next();
+ });
+
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:8081"],
+  })
+);
+
 const { productsRouter } = require("./routes/products");
 const { categoriesRouter } = require("./routes/categories");
 
-const app = express();
+
 const { orderRouter } = require("./routes/order.routes")
 app.use(express.json());
 
@@ -13,11 +29,13 @@ app.use(express.json());
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 
-var corsOptions = {
-  origin: "http://localhost:8081",
-};
+// var corsOptions = {
+//   credentials: true,
+//   origin: "http://localhost:8081",
+// };
+// app.use(cors(corsOptions));
 
-app.use(cors(corsOptions));
+
 
 const db = require("./models");
 const Role = db.role;
@@ -42,14 +60,14 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  cookieSession({
-    name: "Cafe-session",
-    keys: ["key1", "key2"],
-    secret: process.env.COOKIE_SECRET, //  secret environment variable
-    httpOnly: true,
-  })
-);
+// app.use(
+//   cookieSession({
+//     name: "Cafe-session",
+//     keys: ["key1", "key2"],
+//     secret: process.env.COOKIE_SECRET, //  secret environment variable
+//     httpOnly: true,
+//   })
+// );
 app.use(["/product", "/products"], productsRouter);
 app.use(["/category", "/categories"], categoriesRouter);
 
