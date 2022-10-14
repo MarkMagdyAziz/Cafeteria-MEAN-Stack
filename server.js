@@ -4,12 +4,18 @@ const cookieSession = require("cookie-session");
 const dbConfig = require("./config/db.config.js");
 const app = express();
 
-app.use((req,res,next) => {
-  res.setHeader("Access-Control-Allow-Origin","*");
- res.setHeader("Access-Control-Allow-Methods","*");
- res.setHeader("Access-Control-Allow-Header","*");
- next();
- });
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, DELETE, PUT, OPTIONS"
+  );
+  next();
+}
 
 app.use(
   cors({
