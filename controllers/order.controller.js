@@ -5,7 +5,7 @@ const ObjectId = require('mongoose').Types.ObjectId
 
 //get all orders 
 exports.getAll = async (req, res) => {
-    await OrderModel.find({}).populate('user').exec((err, orders) => {
+    await OrderModel.find({}).populate('user').populate("Prodeuct").exec((err, orders) => {
         (!err) ? res.send(orders)
             : console.log('error in get all Orders: ' + JSON.stringify(err, undefined, 2))
     })
@@ -87,7 +87,7 @@ exports.postNewOrder = (req, res) => {
         action: req.body.action,
         room: req.body.room,
         ext: req.body.ext,
-
+        Prodeuct: req.body.Prodeuct 
     });
     order.save((err, order) => {
         (!err) ? res.send(order)
