@@ -15,7 +15,7 @@ app.use((req, res, next) => {
     "GET, POST, PATCH, DELETE, PUT, OPTIONS"
   );
   next();
-}
+});
 
 app.use(
   cors({
@@ -29,15 +29,7 @@ app.use(
 const { productsRouter } = require("./routes/products");
 const { categoriesRouter } = require("./routes/categories");
 const {orderRouter } = require("./routes/order.routes")
-// test 2
-//
 
-
-
-
-const { categoriesRouter } = require("./routes/categories");
-
-const { orderRouter } = require("./routes/order.routes");
 
 app.use(express.json());
 
