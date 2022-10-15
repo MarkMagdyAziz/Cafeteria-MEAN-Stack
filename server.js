@@ -24,6 +24,8 @@ app.use(
   })
 );
 
+
+
 const { productsRouter } = require("./routes/products");
 const { categoriesRouter } = require("./routes/categories");
 const {orderRouter } = require("./routes/order.routes")
@@ -31,14 +33,8 @@ const {orderRouter } = require("./routes/order.routes")
 //
 
 
-app.use(
-  cors({
-    credentials: true,
-    origin: ["http://localhost:8081"],
-  })
-);
 
-const { productsRouter } = require("./routes/products");
+
 const { categoriesRouter } = require("./routes/categories");
 
 const { orderRouter } = require("./routes/order.routes");
