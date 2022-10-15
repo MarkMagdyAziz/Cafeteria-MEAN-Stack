@@ -2,11 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
 const dbConfig = require("./config/db.config.js");
-const { productsRouter } = require("./routes/products");
-const { categoriesRouter } = require("./routes/categories");
-
 const app = express();
-const { orderRouter } = require("./routes/order.routes");
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -21,17 +17,23 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:8081"],
+  })
+);
+
+const { productsRouter } = require("./routes/products");
+const { categoriesRouter } = require("./routes/categories");
+
+const { orderRouter } = require("./routes/order.routes");
+
 app.use(express.json());
 
 // routes
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
-
-var corsOptions = {
-  origin: "http://localhost:8081",
-};
-
-app.use(cors(corsOptions));
 
 const db = require("./models");
 const Role = db.role;

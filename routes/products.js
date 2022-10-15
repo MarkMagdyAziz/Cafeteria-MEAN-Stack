@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
 // Get all products
 router.get("/", async (req, res) => {
   try {
-    const prodcts = await ProductModel.find({});
+    const prodcts = await ProductModel.find({}).populate("productTo").exec();
     res.status(200).json(prodcts);
   } catch (err) {
     res.status(500).json(err.message);
@@ -33,7 +33,9 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const _id = req.params.id;
   try {
-    const user = await ProductModel.findOne({ _id });
+    const user = await ProductModel.findOne({ _id })
+      .populate("productTo")
+      .exec();
     user ? res.status(200).json(user) : res.status(500).json("user not found");
   } catch (err) {
     res.status(500).json(err.message);
