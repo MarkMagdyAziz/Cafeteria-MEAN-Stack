@@ -15,7 +15,21 @@ app.use((req, res, next) => {
     "GET, POST, PATCH, DELETE, PUT, OPTIONS"
   );
   next();
-});
+}
+
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:8081"],
+  })
+);
+
+const { productsRouter } = require("./routes/products");
+const { categoriesRouter } = require("./routes/categories");
+const {orderRouter } = require("./routes/order.routes")
+// test 2
+//
+
 
 app.use(
   cors({
@@ -34,6 +48,14 @@ app.use(express.json());
 // routes
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
+
+// var corsOptions = {
+//   credentials: true,
+//   origin: "http://localhost:8081",
+// };
+// app.use(cors(corsOptions));
+
+
 
 const db = require("./models");
 const Role = db.role;
@@ -58,14 +80,14 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  cookieSession({
-    name: "Cafe-session",
-    keys: ["key1", "key2"],
-    secret: process.env.COOKIE_SECRET, //  secret environment variable
-    httpOnly: true,
-  })
-);
+// app.use(
+//   cookieSession({
+//     name: "Cafe-session",
+//     keys: ["key1", "key2"],
+//     secret: process.env.COOKIE_SECRET, //  secret environment variable
+//     httpOnly: true,
+//   })
+// );
 app.use(["/product", "/products"], productsRouter);
 app.use(["/category", "/categories"], categoriesRouter);
 

@@ -14,6 +14,10 @@ const prodctSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Product price is required!!"],
   },
+  IsAvailable :{
+    type:Boolean ,
+    default:true ,
+  },
   img: {
     type: String,
     required: [true, "Product image is required!!"],
