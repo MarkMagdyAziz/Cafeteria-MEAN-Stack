@@ -8,6 +8,7 @@ router.post("/", async (req, res) => {
     name: req.body.name,
     price: req.body.price,
     img: req.body.img,
+    productTo: req.body.productTo,
   };
   const product = new ProductModel(productData);
 
