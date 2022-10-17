@@ -28,6 +28,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const categories = await CategoryModel.find({});
+
+    res.status(200).json(categories);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
 // Get one category
 router.get("/:id", async (req, res) => {
   const _id = req.params.id;
