@@ -15,7 +15,7 @@ app.use((req, res, next) => {
     "GET, POST, PATCH, DELETE, PUT, OPTIONS"
   );
   next();
-}
+});
 
 app.use(
   cors({
@@ -26,21 +26,6 @@ app.use(
 
 const { productsRouter } = require("./routes/products");
 const { categoriesRouter } = require("./routes/categories");
-const {orderRouter } = require("./routes/order.routes")
-// test 2
-//
-
-
-app.use(
-  cors({
-    credentials: true,
-    origin: ["http://localhost:8081"],
-  })
-);
-
-const { productsRouter } = require("./routes/products");
-const { categoriesRouter } = require("./routes/categories");
-
 const { orderRouter } = require("./routes/order.routes");
 
 app.use(express.json());
@@ -54,8 +39,6 @@ require("./routes/user.routes")(app);
 //   origin: "http://localhost:8081",
 // };
 // app.use(cors(corsOptions));
-
-
 
 const db = require("./models");
 const Role = db.role;
