@@ -72,7 +72,7 @@ router.put("/:id", async (req, res) => {
   };
 
   try {
-    await CategoryModel.updateOne({ _id }, { category });
+    await CategoryModel.updateOne({ _id },  category );
     res.status(200).send("Updated Success");
   } catch (err) {
     res.status(400).json(err.message);
