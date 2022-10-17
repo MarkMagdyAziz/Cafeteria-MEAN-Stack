@@ -117,11 +117,14 @@ router.put("/:id", async (req, res) => {
     price: req.body.price,
     img: req.body.img,
     timestamp: new Date(),
+    size: req.body.size,
   };
-
   try {
-    await ProductModel.updateOne({ _id }, { product });
-    res.status(200).send("Updated Success");
+    await ProductModel.findByIdAndUpdate({ _id }, product);
+    let updatedProduct = await ProductModel.findById({ _id });
+    console.log(updatedProduct);
+
+    res.status(200).send(updatedProduct);
   } catch (err) {
     res.status(400).json(err.message);
   }
