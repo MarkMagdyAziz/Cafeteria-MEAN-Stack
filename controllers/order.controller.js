@@ -63,9 +63,7 @@ exports.getOrderModelByDate = async (req, res) => {
             })
         }
 
-        res.status(200).json({
-            data: OrderModels
-        })
+        res.status(200).json(OrderModels)
 
     } catch (error) {
         return res.status(500).json({
