@@ -30,7 +30,7 @@ const prodctSchema = new mongoose.Schema({
     default: "sm",
   },
   timestamp: { type: Date, default: Date.now() },
-  category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+  productTo: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
 });
 
 module.exports = mongoose.model("Product", prodctSchema);

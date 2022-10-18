@@ -20,7 +20,18 @@ router.post("/", async (req, res) => {
 // Get all categories
 router.get("/", async (req, res) => {
   try {
-    const categories = await CategoryModel.find({}).populate("product").exec();
+    const categories = await CategoryModel.find({});
+
+    res.status(200).json(categories);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+router.get("/", async (req, res) => {
+  try {
+    const categories = await CategoryModel.find({});
+
     res.status(200).json(categories);
   } catch (err) {
     res.status(500).json(err.message);
@@ -31,9 +42,8 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const _id = req.params.id;
   try {
-    const category = await CategoryModel.findOne({ _id })
-      .populate("product")
-      .exec();
+    const category = await CategoryModel.findOne({ _id });
+
     category
       ? res.status(200).json(category)
       : res.status(500).json("category not found");
@@ -62,7 +72,7 @@ router.put("/:id", async (req, res) => {
   };
 
   try {
-    await CategoryModel.updateOne({ _id }, { category });
+    await CategoryModel.updateOne({ _id },  category );
     res.status(200).send("Updated Success");
   } catch (err) {
     res.status(400).json(err.message);

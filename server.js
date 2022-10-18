@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const cookieSession = require("cookie-session");
+//const cookieSession = require("cookie-session");
 const dbConfig = require("./config/db.config.js");
 const app = express();
 
@@ -15,8 +15,8 @@ app.use((req, res, next) => {
     "GET, POST, PATCH, DELETE, PUT, OPTIONS"
   );
   next();
-}
-)
+})
+
 app.use(
   cors({
     credentials: true,
@@ -26,10 +26,7 @@ app.use(
 
 const { productsRouter } = require("./routes/products");
 const { categoriesRouter } = require("./routes/categories");
-const {orderRouter } = require("./routes/order.routes")
-// test 2
-//
-
+const { orderRouter } = require("./routes/order.routes");
 
 app.use(express.json());
 
@@ -42,8 +39,6 @@ require("./routes/user.routes")(app);
 //   origin: "http://localhost:8081",
 // };
 // app.use(cors(corsOptions));
-
-
 
 const db = require("./models");
 const Role = db.role;
