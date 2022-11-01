@@ -15,7 +15,9 @@ app.use((req, res, next) => {
     "GET, POST, PATCH, DELETE, PUT, OPTIONS"
   );
   next();
+
 });
+
 
 app.use(
   cors({
@@ -25,10 +27,9 @@ app.use(
 );
 
 
-
 const { productsRouter } = require("./routes/products");
 const { categoriesRouter } = require("./routes/categories");
-const {orderRouter } = require("./routes/order.routes")
+const { orderRouter } = require("./routes/order.routes");
 
 
 app.use(express.json());
@@ -43,13 +44,13 @@ require("./routes/user.routes")(app);
 // };
 // app.use(cors(corsOptions));
 
-
-
 const db = require("./models");
 const Role = db.role;
 
 db.mongoose
-  //.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+
+   //.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+
   .connect(`${dbConfig.DBURL}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

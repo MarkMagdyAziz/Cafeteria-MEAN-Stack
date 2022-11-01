@@ -26,12 +26,21 @@ exports.getById = (req, res) => {
 
 // get orders by use//********************************************************************************************** */
 exports.getOrdersByUser = async(req, res) => {
-    
-    const UserFound = User.find({user: req.query})
 
-    await OrderModel.find({user: req.query}).populate('user').exec((err, posts) => {
-        (!err)? res.json(posts) : res.status(500).json(err.message)
-    })
+    
+   // const UserFound = User.find({user: req.query})
+
+  //  await OrderModel.find({user: req.query}).populate('user').exec((err, posts) => {
+   //     (!err)? res.json(posts) : res.status(500).json(err.message)
+  //  })
+
+    OrderModel.find({}).populate("user").exec((err, result) => {
+        if(err){
+            return  res.json({error :  err})
+        }
+        res.json({result :  result})
+        });
+
 }
 
 
@@ -57,7 +66,6 @@ exports.getOrderModelByDate = async (req, res) => {
                 $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
                 $lt: new Date(new Date(endDate).setHours(23, 59, 59))
             }
-            //////////////////////////////////////////////////////////////////1
         }).populate('user').exec()
 
         //4. Handle responses
@@ -68,9 +76,7 @@ exports.getOrderModelByDate = async (req, res) => {
             })
         }
 
-        res.status(200).json({
-            data: OrderModels
-        })
+        res.status(200).json( OrderModels)
 
     } catch (error) {
         return res.status(500).json({

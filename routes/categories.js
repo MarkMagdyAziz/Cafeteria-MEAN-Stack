@@ -28,6 +28,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const categories = await CategoryModel.find({});
+
+    res.status(200).json(categories);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
 // Get one category
 router.get("/:id", async (req, res) => {
   const _id = req.params.id;
@@ -62,7 +72,7 @@ router.put("/:id", async (req, res) => {
   };
 
   try {
-    await CategoryModel.updateOne({ _id }, { category });
+    await CategoryModel.updateOne({ _id },  category );
     res.status(200).send("Updated Success");
   } catch (err) {
     res.status(400).json(err.message);
