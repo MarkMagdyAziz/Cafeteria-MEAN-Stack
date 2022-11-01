@@ -1,6 +1,8 @@
 
 const OrderModel = require('../models/orders');
-const ObjectId = require('mongoose').Types.ObjectId
+const ObjectId = require('mongoose').Types.ObjectId ;
+const db = require("../models");
+const User = db.user;
 
 
 //get all orders 
@@ -24,12 +26,21 @@ exports.getById = (req, res) => {
 
 // get orders by use//********************************************************************************************** */
 exports.getOrdersByUser = async(req, res) => {
+
+    
+   // const UserFound = User.find({user: req.query})
+
+  //  await OrderModel.find({user: req.query}).populate('user').exec((err, posts) => {
+   //     (!err)? res.json(posts) : res.status(500).json(err.message)
+  //  })
+
     OrderModel.find({}).populate("user").exec((err, result) => {
         if(err){
             return  res.json({error :  err})
         }
         res.json({result :  result})
         });
+
 }
 
 
